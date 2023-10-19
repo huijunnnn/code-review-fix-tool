@@ -7,13 +7,15 @@ plugins {
     // Java support
     id("java")
     // Kotlin support
-    id("org.jetbrains.kotlin.jvm") version "1.5.30"
+    id("org.jetbrains.kotlin.jvm") version "1.8.0"
     // Gradle IntelliJ Plugin
-    id("org.jetbrains.intellij") version "1.1.6"
+    id("org.jetbrains.intellij") version "1.12.0"
     // Gradle Changelog Plugin
-    id("org.jetbrains.changelog") version "1.3.0"
+    id("org.jetbrains.changelog") version "1.3.1"
     // Gradle Qodana Plugin
-    id("org.jetbrains.qodana") version "0.1.12"
+    id("org.jetbrains.qodana") version "0.1.13"
+    id("org.sonarqube") version "3.3"
+
 }
 
 group = properties("pluginGroup")
@@ -24,12 +26,14 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    implementation("com.taskadapter:trello-java-wrapper:0.14") {
-        exclude("org.slf4j", "slf4j-api")
-    }
-    implementation("com.alibaba:fastjson:1.2.78")
-    implementation("com.mashape.unirest:unirest-java:1.4.9")
-    implementation("org.projectlombok:lombok:1.18.20")
+    implementation("org.springframework:spring-web:3.1.4.RELEASE")
+    compileOnly("org.projectlombok:lombok:1.18.22")
+    implementation("org.mapstruct:mapstruct:1.5.3.Final")
+    annotationProcessor("org.projectlombok:lombok:1.18.22")
+    annotationProcessor("org.mapstruct:mapstruct-processor:1.4.2.Final")
+
+    testCompileOnly("org.projectlombok:lombok:1.18.22")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.22")
 }
 // Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
 intellij {

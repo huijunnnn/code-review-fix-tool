@@ -1,1 +1,1 @@
-rootProject.name = "Thoughtworks Code Review Tools"
+rootProject.name = "Thoughtworks Code Review  Fix Tools"

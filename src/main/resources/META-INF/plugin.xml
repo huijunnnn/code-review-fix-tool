@@ -1,34 +1,31 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>net.lihui.app.plugin.thoughtworkscodereviewtools</id>
+    <id>app.plugin.thoughtworkscodereviewfixtools</id>
     <name>Thoughtworks Code Review Tools</name>
-    <vendor>lihui</vendor>
+    <vendor url="https://lihui.net" email="me@lihui.net">lihui</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+        <!--  显示提示框  -->
+        <notificationGroup id="Custom Notification Group" displayType="BALLOON"/>
+        <applicationConfigurable parentId="root"
+                                 instance="app.plugin.thoughtworkscodereviewfixtools.thoughtworkscodereviewtools.intellij.controller.TwCodeReviewSettingsConfigurable"
+                                 id="app.plugin.thoughtworkscodereviewfixtools.controller.intellij.thoughtworkscodereviewtools.TwCodeReviewSettingsConfigurable"
+                                 displayName="TW Code Review Tools"/>
         <applicationService
-                serviceImplementation="com.github.tcpgnl.thoughtworkscodereviewtools.services.MyApplicationService"/>
-        <projectService
-                serviceImplementation="com.github.tcpgnl.thoughtworkscodereviewtools.services.MyProjectService"/>
+                serviceImplementation="app.plugin.thoughtworkscodereviewfixtools.thoughtworkscodereviewtools.intellij.store.GithubState"/>
+
     </extensions>
-
-    <applicationListeners>
-        <listener class="com.github.tcpgnl.thoughtworkscodereviewtools.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
-
+    <!--  设置Action  -->
     <actions>
-        <action id="net.lihui.app.plugin.thoughtworkscodereviewtools.MessageTools"
-                class="net.lihui.app.plugin.thoughtworkscodereviewtools.MessageTools" text="messageTools"
-                description="提交框">
+        <action id="app.plugin.thoughtworkscodereviewfixtools.thoughtworkscodereviewtools.intellij.CodeReviewFeedbackAction"
+                class="app.plugin.thoughtworkscodereviewfixtools.thoughtworkscodereviewtools.intellij.CodeReviewFeedbackAction" text="Code Review Feedback"
+                description="Submit code review message">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
-            <keyboard-shortcut keymap="$default" first-keystroke="meta alt I"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="control alt F"/>
         </action>
     </actions>
-
-    <extensions defaultExtensionNs="com.intellij">
-        <notificationGroup id="Custom Notification Group" displayType="BALLOON"/>
-    </extensions>
 
 </idea-plugin>
