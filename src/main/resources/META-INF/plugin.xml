@@ -1,8 +1,8 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>app.plugin.thoughtworkscodereviewfixtools</id>
-    <name>Thoughtworks Code Review Tools</name>
-    <vendor url="https://lihui.net" email="me@lihui.net">lihui</vendor>
+    <name>Thoughtworks Code Review Fix Tools</name>
+    <vendor></vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
@@ -10,17 +10,17 @@
         <!--  显示提示框  -->
         <notificationGroup id="Custom Notification Group" displayType="BALLOON"/>
         <applicationConfigurable parentId="root"
-                                 instance="app.plugin.thoughtworkscodereviewfixtools.thoughtworkscodereviewtools.intellij.controller.TwCodeReviewSettingsConfigurable"
-                                 id="app.plugin.thoughtworkscodereviewfixtools.controller.intellij.thoughtworkscodereviewtools.TwCodeReviewSettingsConfigurable"
-                                 displayName="TW Code Review Tools"/>
+                                 instance="app.plugin.thoughtworkscodereviewfixtools.intellij.controller.TwCodeReviewSettingsConfigurable"
+                                 id="app.plugin.thoughtworkscodereviewfixtools.controller.intellij.TwCodeReviewSettingsConfigurable"
+                                 displayName="TW Code Review Fix Tools"/>
         <applicationService
-                serviceImplementation="app.plugin.thoughtworkscodereviewfixtools.thoughtworkscodereviewtools.intellij.store.GithubState"/>
+                serviceImplementation="app.plugin.thoughtworkscodereviewfixtools.intellij.store.GithubState"/>
 
     </extensions>
     <!--  设置Action  -->
     <actions>
-        <action id="app.plugin.thoughtworkscodereviewfixtools.thoughtworkscodereviewtools.intellij.CodeReviewFeedbackAction"
-                class="app.plugin.thoughtworkscodereviewfixtools.thoughtworkscodereviewtools.intellij.CodeReviewFeedbackAction" text="Code Review Feedback"
+        <action id="app.plugin.thoughtworkscodereviewfixtools.intellij.CodeReviewFeedbackAction"
+                class="app.plugin.thoughtworkscodereviewfixtools.intellij.CodeReviewFeedbackAction" text="Code Review Feedback"
                 description="Submit code review message">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
