@@ -1,4 +1,4 @@
-package app.plugin.thoughtworkscodereviewfixtools.thoughtworkscodereviewtools.intellij.store;
+package app.plugin.thoughtworkscodereviewfixtools.intellij.store;
 
 import com.intellij.util.xmlb.annotations.Tag;
 import lombok.AllArgsConstructor;
@@ -23,8 +23,14 @@ public class GithubConfiguration {
     @Tag("githubApiOrganization")
     private String githubApiOrganization;
 
+    @Tag("userName")
+    private String userName;
+
 
     public boolean isAnyBlank() {
-        return githubApiToken.isBlank()|| githubApiOrganization.isBlank()||githubApiRepo.isBlank();
+        return githubApiToken.isBlank()||
+                githubApiOrganization.isBlank()||
+                githubApiRepo.isBlank()||
+                userName.isBlank();
     }
 }

@@ -1,4 +1,4 @@
-package app.plugin.thoughtworkscodereviewfixtools.thoughtworkscodereviewtools.ui;
+package app.plugin.thoughtworkscodereviewfixtools.ui;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;

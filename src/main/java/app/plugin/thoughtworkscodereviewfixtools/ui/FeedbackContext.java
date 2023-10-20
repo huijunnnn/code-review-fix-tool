@@ -1,4 +1,4 @@
-package app.plugin.thoughtworkscodereviewfixtools.thoughtworkscodereviewtools.ui;
+package app.plugin.thoughtworkscodereviewfixtools.ui;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -9,4 +9,5 @@ import lombok.Setter;
 @Builder
 public class FeedbackContext {
     private String feedback;
+    private String label;
 }

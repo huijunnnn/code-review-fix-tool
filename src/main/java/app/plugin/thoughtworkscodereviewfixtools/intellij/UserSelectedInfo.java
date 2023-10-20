@@ -1,4 +1,4 @@
-package app.plugin.thoughtworkscodereviewfixtools.thoughtworkscodereviewtools.intellij;
+package app.plugin.thoughtworkscodereviewfixtools.intellij;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;

@@ -1,8 +1,8 @@
-package app.plugin.thoughtworkscodereviewfixtools.thoughtworkscodereviewtools.intellij.controller;
+package app.plugin.thoughtworkscodereviewfixtools.intellij.controller;
 
-import app.plugin.thoughtworkscodereviewfixtools.thoughtworkscodereviewtools.intellij.store.GithubConfiguration;
-import app.plugin.thoughtworkscodereviewfixtools.thoughtworkscodereviewtools.intellij.store.GithubState;
-import app.plugin.thoughtworkscodereviewfixtools.thoughtworkscodereviewtools.ui.setting.TwCodeReviewSettingsComponent;
+import app.plugin.thoughtworkscodereviewfixtools.intellij.store.GithubConfiguration;
+import app.plugin.thoughtworkscodereviewfixtools.intellij.store.GithubState;
+import app.plugin.thoughtworkscodereviewfixtools.ui.setting.TwCodeReviewSettingsComponent;
 import com.intellij.openapi.options.Configurable;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
@@ -54,9 +54,11 @@ public class TwCodeReviewSettingsConfigurable implements Configurable {
 
     @Override
     public void reset() {
-        GithubConfiguration trelloConfiguration = GithubState.getInstance().getState();
-
-        twCodeReviewSettingsComponent.setGithubApiToken(trelloConfiguration.getGithubApiToken());
+        GithubConfiguration githubConfiguration = GithubState.getInstance().getState();
+        twCodeReviewSettingsComponent.setGithubApiToken(githubConfiguration.getGithubApiToken());
+        twCodeReviewSettingsComponent.setRepoOrganization(githubConfiguration.getGithubApiOrganization());
+        twCodeReviewSettingsComponent.setRepoNameText(githubConfiguration.getGithubApiRepo());
+        twCodeReviewSettingsComponent.setUserNameText(githubConfiguration.getUserName());
 
     }
 
