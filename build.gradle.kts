@@ -27,7 +27,7 @@ repositories {
 }
 dependencies {
     implementation ("org.apache.commons:commons-lang3:3.12.0")
-    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation ("com.squareup.okhttp3:okhttp:4.12.0")
     // Gson
     implementation ("com.google.code.gson:gson:2.8.9")
     implementation("org.springframework:spring-web:3.1.4.RELEASE")
