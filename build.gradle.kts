@@ -29,7 +29,7 @@ dependencies {
     implementation ("org.apache.commons:commons-lang3:3.12.0")
     implementation ("com.squareup.okhttp3:okhttp:4.9.1")
     // Gson
-    implementation ("com.google.code.gson:gson:2.8.9")
+    implementation ("com.google.code.gson:gson:2.10.1")
     implementation("org.springframework:spring-web:3.1.4.RELEASE")
     compileOnly("org.projectlombok:lombok:1.18.22")
     implementation("org.mapstruct:mapstruct:1.5.3.Final")
