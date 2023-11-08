@@ -4,12 +4,11 @@ import app.plugin.thoughtworkscodereviewfixtools.intellij.notification.Notifier;
 import app.plugin.thoughtworkscodereviewfixtools.intellij.store.GithubConfiguration;
 import app.plugin.thoughtworkscodereviewfixtools.ui.FeedbackContext;
 import com.intellij.openapi.project.Project;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -37,33 +36,24 @@ public class GithubService {
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setRequestProperty("Authorization", "Bearer " + githubConfiguration.getGithubApiToken());
             connection.setDoOutput(true);
-
             String title = String.format(SWEEP_MESSAGE_TEMPLATE, feedBackContext.getFeedback(), githubConfiguration.getUserName());
             String issueDesc = buildIssueDesc(feedBackContext, cardDesc);
-            String requestBody = String.format("{\"title\":\"%s\", " +
-                            "\"body\":\"%s\"}",
-                    title, issueDesc);
 
+            String escapedBody = StringEscapeUtils.escapeJava(StringEscapeUtils.escapeHtml4(issueDesc.replace("\t", "\\t")));
+            String requestBody = String.format("{\"title\":\"%s\", \"body\":\"%s\"}", title, escapedBody);
             byte[] requestBodyBytes = requestBody.getBytes(StandardCharsets.UTF_8);
 
             try (DataOutputStream outputStream = new DataOutputStream(connection.getOutputStream())) {
                 outputStream.write(requestBodyBytes);
             }
-
             int responseCode = connection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_CREATED) {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String line;
-                StringBuilder response = new StringBuilder();
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
-                reader.close();
                 Notifier.notifyInfo(project, "Sweep Issue created successfully.");
             } else {
                 String message = "Failed to create sweep issue. Response code: " + responseCode;
                 Notifier.notifyError(project, message);
             }
+            // 关闭连接
             connection.disconnect();
         } catch (IOException e) {
             Notifier.notifyError(project, e.getMessage());
@@ -75,7 +65,6 @@ public class GithubService {
         String issueDesc;
         String label = feedBackContext.getLabel();
         String cardDescPrefix = "请根据title的内容对以下的内容进行";
-
         issueDesc = switch (label) {
             case "refactor" -> cardDescPrefix + "重构：" + cardDesc;
             case "feat" -> cardDescPrefix + "功能新增：" + cardDesc;
@@ -87,6 +76,5 @@ public class GithubService {
         };
         return issueDesc;
     }
-
 }
 

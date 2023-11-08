@@ -16,7 +16,7 @@ import static java.util.Objects.isNull;
 public class CodeReviewFeedbackAction extends AnAction {
 
     private static final String SET_UP_NOTIFICATION = "您尚未配置 Github 信息，请补全 Github 配置信息 设置路径 Preferences -> Tw Code Review Fix Tools 中设置";
-    private static final String USER_SELECT_INFO_DESCRIPTION_TEMPLATE = "需要修改的文件参考路径是: %s, 需要修改的具体参考范围是: %s";
+    private static final String USER_SELECT_INFO_DESCRIPTION_TEMPLATE = "需要修改的文件参考路径是:\n%s,\n需要修改的具体参考范围是:\n%s";
     private static final String ISSUE_CREATED_SUCCESSFULLY_MESSAGE_TEMPLATE ="Issue created successfully, %s:%s";
     private static final String ISSUE_CREATED_FAILED_MESSAGE_TEMPLATE ="Failed to create issue, %s:%s";
 
@@ -38,7 +38,7 @@ public class CodeReviewFeedbackAction extends AnAction {
 
         UserSelectedInfo userSelectedInfo = new UserSelectedInfo(actionEvent);
         String cardDesc = buildFileDesc(userSelectedInfo);
-
+        System.out.println(cardDesc);
         FeedbackContext feedbackContext = showFeedbackDialog(userSelectedInfo.getProject());
 
         if (isNull(feedbackContext)) {
