@@ -26,7 +26,7 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    implementation ("org.apache.commons:commons-lang3:3.12.0")
+    implementation ("org.apache.commons:commons-lang3:3.13.0")
     implementation ("com.squareup.okhttp3:okhttp:4.9.1")
     // Gson
     implementation ("com.google.code.gson:gson:2.8.9")
