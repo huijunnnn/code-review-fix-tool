@@ -38,8 +38,8 @@ public class GithubService {
             connection.setDoOutput(true);
             String title = String.format(SWEEP_MESSAGE_TEMPLATE, feedBackContext.getFeedback(), githubConfiguration.getUserName());
             String issueDesc = buildIssueDesc(feedBackContext, cardDesc);
-
-            String escapedBody = StringEscapeUtils.escapeJava(StringEscapeUtils.escapeHtml4(issueDesc.replace("\t", "\\t")));
+            // 转义HTML特殊字符
+            String escapedBody = escapeHtmlAndPreserveIndent(issueDesc);
             String requestBody = String.format("{\"title\":\"%s\", \"body\":\"%s\"}", title, escapedBody);
             byte[] requestBodyBytes = requestBody.getBytes(StandardCharsets.UTF_8);
 
@@ -75,6 +75,19 @@ public class GithubService {
             default -> cardDescPrefix + "修改：" + cardDesc;
         };
         return issueDesc;
+    }
+    private static String escapeHtmlAndPreserveIndent(String input) {
+        StringBuilder result = new StringBuilder();
+        String[] lines = input.split("\n");
+
+        for (String line : lines) {
+            // 转义HTML特殊字符
+            String escapedLine = StringEscapeUtils.escapeHtml4(line.trim());
+            // 添加到结果中
+            result.append(escapedLine).append("\\n");
+        }
+
+        return result.toString();
     }
 }
 
